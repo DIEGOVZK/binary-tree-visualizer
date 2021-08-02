@@ -1,51 +1,50 @@
-
 // structure of the tree object as individual nodes
 class treeNode {
     constructor(info) {
         this.info = info;
-        this.right = null;
-        this.left = null;
+        this.right = undefined;
+        this.left = undefined;
     }
 }
 
 // creates and inserts new values to the nodes
-function insertNode(mainNode, x)
+function insertNode(node, x)
 {
-    var newNode = new treeNode(x);
-    if(this.info === null)
-        this.info = newNode;
-
+    if (node.info === undefined)
+    {
+        node.info = x;
+        node.left = new treeNode;
+        node.right = new treeNode;
+    } 
     else
-        if(x > newNode.info)
-        {
-            if(mainNode.left === null)
-                mainNode.left = newNode;
-            else
-                this.insereNode(mainNode.left, x);
-        }
+    {
+        if (node.info > x) 
+            insertNode(node.left, x);
         else
-        {
-            if(mainNode.right === null)
-                mainNode.right = newNode;
-            else
-                this.insereNode(mainNode.right, x);    
-        }
-        
+            insertNode(node.right, x);
+            
+    }      
 }
 
-// performs a traversal on the tree, increasing order
-function inOrder(mainNode)
+// performs a traversal on the tree, in increasing order
+function inOrder(node)
 {
-    if(mainNode !== null)
+    if(node.info !== undefined)
     {
-        this.inOrder(mainNode.left);
-        console.log(mainNode.info);
-        this.inOrder(mainNode.right);
+        this.inOrder(node.left);
+        console.log(node.info);
+        this.inOrder(node.right);
     }
 }
 
+// creates a tree, inserts new nodes, output values
 var tree = new treeNode;
-insereNode(tree, 1);
-insereNode(tree, 2);
 
-inOrder(tree)
+insertNode(tree, 1);
+insertNode(tree, 3);
+insertNode(tree, 2);
+insertNode(tree, 4);
+
+console.log(tree);
+
+inOrder(tree);
