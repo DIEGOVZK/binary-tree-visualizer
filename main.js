@@ -7,44 +7,52 @@ class treeNode {
     }
 }
 
-// creates and inserts new values to the nodes
-function insertNode(node, x)
-{
-    if (node.info === undefined)
-    {
-        node.info = x;
-        node.left = new treeNode;
-        node.right = new treeNode;
-    } 
-    else
-    {
-        if (node.info > x) 
-            insertNode(node.left, x);
-        else
-            insertNode(node.right, x);
-            
-    }      
-}
+const ant = {
 
-// performs a traversal on the tree, in increasing order
-function inOrder(node)
-{
-    if(node.info !== undefined)
+    // creates and inserts new values to the nodes
+    insertNode(tree, x)
     {
-        this.inOrder(node.left);
-        console.log(node.info);
-        this.inOrder(node.right);
+        if (tree.info === undefined)
+        {
+            tree.info = x;
+            tree.left = new treeNode;
+            tree.right = new treeNode;
+        } 
+        else
+        {
+            if (tree.info > x) 
+                this.insertNode(tree.left, x);
+            else
+                this.insertNode(tree.right, x);
+        }  
+    },
+
+    // creates many nodes with unknown amount of numbers
+    putMany(tree, ...x)
+    {
+        const items = x;
+        for (let index = 0; index < items.length; index++)
+            this.insertNode(tree, items[index]);
+    },
+
+    // performs a traversal on the tree, in increasing order
+    inOrder(tree)
+    {
+        if(tree.info !== undefined)
+        {
+            this.inOrder(tree.left);
+            console.log(tree.info);
+            this.inOrder(tree.right);
+        }
     }
 }
 
+
 // creates a tree, inserts new nodes, output values
-var tree = new treeNode;
+let tree_1 = new treeNode;
 
-insertNode(tree, 1);
-insertNode(tree, 3);
-insertNode(tree, 2);
-insertNode(tree, 4);
+ant.insertNode(tree_1, 1);
+ant.putMany(tree_1, 3, 2, 4, 7, 5, 6);
+ant.inOrder(tree_1);
 
-console.log(tree);
-
-inOrder(tree);
+console.log(tree_1);
